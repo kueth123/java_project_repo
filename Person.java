@@ -1,23 +1,17 @@
-public class Person implements Nameable {
-    private int id;
-    private String name;
-    private int age;
-    private boolean parentPermission;
+import java.util.ArrayList;
+import java.util.List;
+class Person implements Nameable{
+    int id;
+    String name;
+    int age;
+    boolean parent_permission;
+    //constructor
 
-
-    public Person(int age, boolean parentPermission, String name) {
-
+    public Person(int id, String name, int age, boolean parent_permission) {
+        this.id = id;
+        this.name = name;
         this.age = age;
-        this.parentPermission = parentPermission;
-        this.name = name != null ? name : "unknown";
-    }
-
-    public Person(int age, boolean parentPermission) {
-        this(age, parentPermission, "unknown");
-    }
-
-    public Person(int age) {
-        this(age, true, "unknown");
+        this.parent_permission = parent_permission;
     }
 
     public int getId() {
@@ -28,30 +22,46 @@ public class Person implements Nameable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name != null ? name : "unknown";
-    }
-
     public int getAge() {
         return age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
-    private boolean ofAge() {
-        return age >= 21;
+    private boolean of_age(int age) {
+        if (age >= 18) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-    public boolean canUseServices() {
-        return ofAge() || parentPermission;
+    public boolean can_use_services() {
+        if (age >= 18 || parent_permission == true) {
+        }
+        return true;
     }
-
     @Override
     public String getCorrectName() {
         return name;
     }
+    private List<Rental> rentals;
+
+    public Person(String name) {
+        this.name = name;
+        this.rentals = new ArrayList<>();
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void addRental(Rental rental) {
+        rentals.add(rental);
+    }
 }
-
-
